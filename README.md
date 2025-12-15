@@ -25,6 +25,8 @@ cd autonumba
 python -m pip install --user .
 ```
 
+or use the prebuilt binary in bin/ `(bin/autonumba.exe)`
+
 ## Usage 📝
 
 Boost a folder:
