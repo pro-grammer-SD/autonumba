@@ -10,6 +10,7 @@ Autonumba is an aggressive auto-JIT tool that scans Python code and injects `@nj
 * ❌ `exclude.txt` support for skipping files
 * ⚙️ Configurable Numba flags for cache, fastmath, parallel, nogil, boundscheck
 * 🖥️ CLI-first, fast, clean workflow
+* 🛑 Supports `#nonumba` comment to skip functions from JIT injection
 
 ## Installation 💻
 
@@ -92,6 +93,7 @@ Flags are **enabled by default**. Pass flags to selectively override defaults.
 * Designed for numeric-heavy code.
 * Dynamic Python features (strings, IO, objects) may not compile correctly.
 * Use responsibly. Native binaries are fast but can break dynamic behavior.
+* Functions with `#nonumba` comment on the definition line will be skipped from JIT injection.
 
 ## GitHub Stats 📊
 
@@ -102,4 +104,4 @@ Flags are **enabled by default**. Pass flags to selectively override defaults.
 
 ![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Build Status]([https://img.shields.io/badge/build-pass](https://img.shields.io/badge/build-pass)
+![Build Status]([https://img.shields.io](https://img.shields.io)

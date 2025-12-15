@@ -1,11 +1,16 @@
 import ast
 
 class Injector(ast.NodeTransformer):
-    def __init__(self, deco):
+    def __init__(self, deco, src_lines):
         self.deco = deco
+        self.src_lines = src_lines
         self.changed = False
 
     def visit_FunctionDef(self, node):
+        # Check if the original line contains '#nonumba'
+        if "#nonumba" in self.src_lines[node.lineno - 1]:
+            return node
+
         for d in node.decorator_list:
             if isinstance(d, ast.Call) and getattr(d.func, "id", None) == "njit":
                 return node
@@ -19,14 +24,14 @@ def make_decorator(opts):
 
 def boost_file(path, opts, inplace):
     src = path.read_text(encoding="utf8")
+    lines = src.splitlines()
     tree = ast.parse(src)
     deco = make_decorator(opts)
-    inj = Injector(deco)
+    inj = Injector(deco, lines)
     tree = inj.visit(tree)
     if not inj.changed:
         return
 
-    # Add imports + Numba warning suppression
     preamble = (
         "from numba import njit\n"
         "import warnings\n"
